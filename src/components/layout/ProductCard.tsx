@@ -53,7 +53,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
     if (data) {
       console.log(data.category);
       if (data.category === "accessories") {
-        navigate(`/accessorie/${data._id}`, {
+        navigate(`/accessories/${data._id}`, {
           state: { productData: data },
         });
         return;

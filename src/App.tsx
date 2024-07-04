@@ -13,6 +13,8 @@ import NotFound from "./components/utils/NotFound";
 import UserProfile from "./components/layout/UserProfile";
 import EditProfile from "./components/layout/EditProfile";
 import PastOrders from "./components/_root/pages/productFields/PastOrders";
+import About from "./components/_root/pages/static pages/About";
+import ContactUs from "./components/_root/pages/static pages/ContactUs";
 
 function App() {
   return (
@@ -41,8 +43,8 @@ function App() {
           />
           <Route path="/cart" element={<Cart />} />
           <Route path="/wishlist" element={<Wishlist />} />
-          <Route path="/contact" element={<NotFound />} />
-          <Route path="/about" element={<NotFound />} />
+          <Route path="/contact" element={<ContactUs />} />
+          <Route path="/about" element={<About />} />
           <Route path="/:username" element={<UserProfile />} />
           <Route path="/:username/editProfile" element={<EditProfile />} />
           <Route path="/:username/orders" element={<PastOrders />} />

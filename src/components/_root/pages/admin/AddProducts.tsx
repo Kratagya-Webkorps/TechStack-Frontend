@@ -72,14 +72,18 @@ const AddProducts: React.FC = () => {
     });
     try {
       const token = Cookies.get("token");
-      console.log({formDataToSend});
+      console.log({ formDataToSend });
 
-      const response = await axios.post(`${ADMIN_PORT}/create`, formDataToSend, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const response = await axios.post(
+        `${ADMIN_PORT}/create`,
+        formDataToSend,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
 
       console.log(response.data);
       setFormData(initialFormData);
@@ -91,7 +95,7 @@ const AddProducts: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-grow items-center justify-center h-min md:mt-24 bg-gray-100 p-4">
+    <div className="flex flex-grow items-center justify-center h-min  bg-gray-100 p-4">
       <div className="w-full max-w-2xl bg-white rounded-lg shadow-md p-6">
         <h1 className="text-2xl font-bold mb-6 text-center">Add New Product</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -111,6 +115,7 @@ const AddProducts: React.FC = () => {
             </label>
             <textarea
               name="description"
+              placeholder="Description..."
               className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
               value={formData.description}
               onChange={handleChange}

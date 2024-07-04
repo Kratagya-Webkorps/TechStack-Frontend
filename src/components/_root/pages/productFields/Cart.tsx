@@ -196,7 +196,7 @@ const Cart = () => {
                 {product.product.price * product.quantity}
               </td>
               <td
-                className="p-2"
+                className="p-2 cursor-pointer "
                 onClick={() => handleRemove(product.product._id)}
               >
                 <RxCross2 />
