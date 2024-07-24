@@ -19,14 +19,14 @@ const ProductPage: React.FC<ProductDetails> = ({
 
   return (
     <div className=" mx-auto bg-white shadow-md p-4">
-      <div className="flex flex-col md:flex-row items-center ">
+      <div className="flex flex-col xl:flex-row items-center ">
         <img
           src={productImage}
           alt={name}
           className="object-contain max-h-96 "
         />
 
-        <div className="md:w-1/2 md:pl-10 mt-4 md:mt-0 p-4">
+        <div className=" md:pl-10 mt-4 md:mt-0 p-4">
           <h1 className="text-2xl md:text-3xl font-bold mb-2">{name}</h1>
           <p className="text-gray-600 mb-2">{category}</p>
           <p className="text-gray-800 mb-4">{description}</p>
@@ -50,7 +50,7 @@ const ProductPage: React.FC<ProductDetails> = ({
               <span className="text-red-500">Out of Stock</span>
             )}
           </div>
-          <div className="flex flex-col md:flex-row items-start md:items-center">
+          <div className="flex flex-col md:flex-row items-start md:items-center ">
             <AddToCart
               productId={productId as string}
               stock={stock}
