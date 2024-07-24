@@ -163,71 +163,80 @@ const Cart = () => {
   }, [cartData, token, baseURL]);
 
   return (
-    <div className="max-w-4xl mx-auto mt-10 p-5 bg-white shadow-md">
-      <div className="mb-5">
-        <Link to="/" className="text-gray-600 hover:text-gray-800">
-          Return To Shop
-        </Link>
-      </div>
-      <table className="w-full mb-5 border-collapse border">
-        <thead>
-          <tr className="border-b">
-            <th className="p-2 text-left">Product</th>
-            <th className="p-2 text-left">Price</th>
-            <th className="p-2 text-left">Quantity</th>
-            <th className="p-2 text-left">Subtotal</th>
-            <th className="p-2 text-left">Remove</th>
-          </tr>
-        </thead>
-        <tbody>
-          {cartProducts.map((product) => (
-            <tr key={product.product._id} className="border-b">
-              <td className="p-2 flex items-center">
-                <img
-                  src={product.product.productImage}
-                  alt={product.product.name}
-                  className="w-16 h-16 object-contain"
-                />
-                <span className="ml-3">{product.product.name}</span>
-              </td>
-              <td className="p-2">{product.product.price}</td>
-              <td className="p-2">{product.quantity}</td>
-              <td className="p-2">
-                {product.product.price * product.quantity}
-              </td>
-              <td
-                className="p-2 cursor-pointer "
-                onClick={() => handleRemove(product.product._id)}
-              >
-                <RxCross2 />
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <>
+      {" "}
+      {cartProducts.length > 0 ? (
+        <div className="max-w-4xl mx-auto mt-10 p-5 bg-white shadow-md">
+          <div className="mb-5">
+            <Link to="/" className="text-gray-600 hover:text-gray-800">
+              Return To Shop
+            </Link>
+          </div>
+          <table className="w-full mb-5 border-collapse border">
+            <thead>
+              <tr className="border-b">
+                <th className="p-2 text-left">Product</th>
+                <th className="p-2 text-left">Price</th>
+                <th className="p-2 text-left">Quantity</th>
+                <th className="p-2 text-left">Subtotal</th>
+                <th className="p-2 text-left">Remove</th>
+              </tr>
+            </thead>
+            <tbody>
+              {cartProducts.map((product) => (
+                <tr key={product.product._id} className="border-b">
+                  <td className="p-2 flex items-center">
+                    <img
+                      src={product.product.productImage}
+                      alt={product.product.name}
+                      className="w-16 h-16 object-contain"
+                    />
+                    <span className="ml-3">{product.product.name}</span>
+                  </td>
+                  <td className="p-2">{product.product.price}</td>
+                  <td className="p-2">{product.quantity}</td>
+                  <td className="p-2">
+                    {product.product.price * product.quantity}
+                  </td>
+                  <td
+                    className="p-2 cursor-pointer "
+                    onClick={() => handleRemove(product.product._id)}
+                  >
+                    <RxCross2 />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
 
-      <div className="border p-5">
-        <div className="flex justify-between mb-3">
-          <span>Subtotal:</span>
-          <span>{subtotal}</span>
+          <div className="border p-5">
+            <div className="flex justify-between mb-3">
+              <span>Subtotal:</span>
+              <span>{subtotal}</span>
+            </div>
+            <div className="flex justify-between mb-3">
+              <span>Shipping:</span>
+              <span>Free</span>
+            </div>
+            <div className="flex justify-between font-bold">
+              <span>Total:</span>
+              <span>{subtotal}</span>
+            </div>
+            <button
+              onClick={handlePayment}
+              className="bg-red-500 text-white w-full mt-5 py-3 rounded-md"
+            >
+              Proceed to checkout
+            </button>
+          </div>
+          {error && <p className="text-red-500 mt-3">{error}</p>}
         </div>
-        <div className="flex justify-between mb-3">
-          <span>Shipping:</span>
-          <span>Free</span>
-        </div>
-        <div className="flex justify-between font-bold">
-          <span>Total:</span>
-          <span>{subtotal}</span>
-        </div>
-        <button
-          onClick={handlePayment}
-          className="bg-red-500 text-white w-full mt-5 py-3 rounded-md"
-        >
-          Proceed to checkout
-        </button>
-      </div>
-      {error && <p className="text-red-500 mt-3">{error}</p>}
-    </div>
+      ):(
+        <h2 className="text-3xl mt-4 sm:text-4xl leading-normal font-extrabold tracking-tight">
+          Nothing Inside Cart 
+        </h2>
+      )}
+    </>
   );
 };
 

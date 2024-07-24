@@ -177,4 +177,3 @@ const AddToCart: React.FC<AddToCartProps> = ({ productId, stock, price }) => {
 };
 
 export default AddToCart;
-// https://github.com/Kratagya-Webkorps/Fronted-ecommerce-website.git
