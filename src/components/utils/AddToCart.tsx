@@ -96,6 +96,10 @@ const AddToCart: React.FC<AddToCartProps> = ({ productId, stock, price }) => {
   }, [responseId, fetchPayment]);
 
   useEffect(() => {
+    if (stock === 0) setQuantity(0);
+  }, [stock]);
+
+  useEffect(() => {
     const isObjEmpty = (obj: any) => Object.keys(obj).length === 0;
     if (!isObjEmpty(responseState)) {
       setOrderData((prevOrderData: any) => ({
@@ -156,21 +160,23 @@ const AddToCart: React.FC<AddToCartProps> = ({ productId, stock, price }) => {
           +
         </button>
       </div>
-      <div className="flex space-x-4">
-        <button
-          className="bg-orange-500 text-white px-6 py-2 rounded-md"
-          onClick={handleAddToCart}
-          disabled={isAddToCartLoading}
-        >
-          {isAddToCartLoading ? "Adding..." : "Add to Cart"}
-        </button>
-        <button
-          className="bg-orange-700 text-white h-10 px-6 py-2 rounded-md"
-          onClick={handleBuyNow}
-        >
-          Buy
-        </button>
-      </div>
+      {stock > 0 && (
+        <div className="flex space-x-4">
+          <button
+            className="bg-orange-500 text-white px-6 py-2 rounded-md"
+            onClick={handleAddToCart}
+            disabled={isAddToCartLoading}
+          >
+            {isAddToCartLoading ? "Adding..." : "Add to Cart"}
+          </button>
+          <button
+            className="bg-orange-700 text-white h-10 px-6 py-2 rounded-md"
+            onClick={handleBuyNow}
+          >
+            Buy
+          </button>
+        </div>
+      )}
       {addToCartError && <p className="text-red-500 mt-4">{addToCartError}</p>}
     </div>
   );
