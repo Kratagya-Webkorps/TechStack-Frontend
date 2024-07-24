@@ -28,7 +28,7 @@ const Wishlist = () => {
       : process.env.REACT_APP_USER_PORT;
 
   const { data: wishlistData } = useWishlistFetch({ username });
-  const { data, makeRequest: removeFromWishlistRequest } = usePost(
+  const {makeRequest: removeFromWishlistRequest } = usePost(
     `${baseURL}/delete-from-wishlist`,
     {
       headers: {
@@ -92,44 +92,52 @@ const Wishlist = () => {
   }, [wishlistData, token, baseURL]);
 
   return (
-    <div className="max-w-4xl mx-auto mt-10 p-5 bg-white shadow-md">
-      <div className="mb-5">
-        <Link to="/" className="text-gray-600 hover:text-gray-800">
-          Return To Shop
-        </Link>
-      </div>
-      <table className="w-full mb-5 border-collapse border">
-        <thead>
-          <tr className="border-b">
-            <th className="p-2 text-left">Product</th>
-            <th className="p-2 text-left">Price</th>
-            <th className="p-2 text-left">Remove</th>
-          </tr>
-        </thead>
-        <tbody>
-          {wishlistProducts.map((product) => (
-            <tr key={product.product._id} className="border-b">
-              <td className="p-2 flex items-center">
-                <img
-                  src={product.product.productImage}
-                  alt={product.product.name}
-                  className="w-16 h-16 object-contain"
-                />
-                <span className="ml-3">{product.product.name}</span>
-              </td>
-              <td className="p-2">{product.product.price}</td>
-              <td
-                className="p-2 cursor-pointer"
-                onClick={() => handleRemove(product.product._id)}
-              >
-                <RxCross2 />
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      {error && <p>{error}</p>}
-    </div>
+    <>
+      {wishlistProducts.length > 0 ? (
+        <div className="max-w-4xl mx-auto mt-10 p-5 bg-white shadow-md">
+          <div className="mb-5">
+            <Link to="/" className="text-gray-600 hover:text-gray-800">
+              Return To Shop
+            </Link>
+          </div>
+          <table className="w-full mb-5 border-collapse border">
+            <thead>
+              <tr className="border-b">
+                <th className="p-2 text-left">Product</th>
+                <th className="p-2 text-left">Price</th>
+                <th className="p-2 text-left">Remove</th>
+              </tr>
+            </thead>
+            <tbody>
+              {wishlistProducts.map((product) => (
+                <tr key={product.product._id} className="border-b">
+                  <td className="p-2 flex items-center">
+                    <img
+                      src={product.product.productImage}
+                      alt={product.product.name}
+                      className="w-16 h-16 object-contain"
+                    />
+                    <span className="ml-3">{product.product.name}</span>
+                  </td>
+                  <td className="p-2">{product.product.price}</td>
+                  <td
+                    className="p-2 cursor-pointer"
+                    onClick={() => handleRemove(product.product._id)}
+                  >
+                    <RxCross2 />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          {error && <p>{error}</p>}
+        </div>
+      ) : (
+        <h2 className="text-3xl mt-4 sm:text-4xl leading-normal font-extrabold tracking-tight">
+          Nothing Inside Wishlist
+        </h2>
+      )}
+    </>
   );
 };
 
